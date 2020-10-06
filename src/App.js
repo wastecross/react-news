@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './assets/news.png';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import News from './containers/News/News';
+import Home from './containers/Home/Home';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to news
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    //initialize button footer
+    this.state = {
+      footer: (
+        <button className='App-button-enter' onClick={this.news}>
+          Enter
+        </button>
+      ),
+    };
+  }
+
+  home = () => {
+    this.props.history.push('/');
+    this.setState({
+      footer: (
+        <button className='App-button-enter' onClick={this.news}>
+          Enter
+        </button>
+      ),
+    });
+  };
+
+  news = () => {
+    this.props.history.push('/news');
+    this.setState({
+      footer: (
+        <button className='App-button-back' onClick={this.home}>
+          Back
+        </button>
+      ),
+    });
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <div className="App-container">
+          <Route path="/" exact component={Home} />
+          <Route path="/news" component={News} />
+        </div>
+        <div className="App-footer">{this.state.footer}</div>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default () => (
+  <div>
+    <Router>
+      <Route component={App} />
+    </Router>
+  </div>
+);
