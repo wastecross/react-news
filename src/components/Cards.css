@@ -1,0 +1,26 @@
+.Cards {
+  background-color: cornsilk;
+  border-radius: 13px 13px 13px 13px;
+  border: 0px solid #ffffff;
+  width: 200px;
+  height: 250px;
+  margin: 20px 50px;
+}
+
+.Cards-image {
+    border-radius: 13px 13px 0 0;
+  width: 100%;
+  height: 100px;
+}
+
+.Cards-p {
+  color: black;
+  font-size: smaller;
+  text-align: left;
+  margin: 5px 5px;
+}
+
+.Cards-h4 {
+  color: black;
+  font-size: small;
+}
