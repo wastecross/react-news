@@ -21,15 +21,21 @@ const News = () => {
   const cards =
     data.status === 200 ? (
       info.articles.map((news) => (
-        <Cards title={news.title} image={news.urlToImage} author={news.author} content={news.content} />
+        <Cards
+          title={news.title}
+          image={news.urlToImage}
+          author={news.author}
+          content={news.content}
+          url={news.url}
+        />
       ))
     ) : (
       <span> Error </span>
     );
 
   return (
-    <div className='News'>
-      <div className='News-container'>{cards}</div>
+    <div className="News">
+      <div className="News-container">{cards}</div>
     </div>
   );
 };
