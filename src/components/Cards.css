@@ -1,10 +1,13 @@
 .Cards {
+  margin: 20px 50px;
+}
+
+.Card {
   background-color: cornsilk;
   border-radius: 13px 13px 13px 13px;
   border: 0px solid #ffffff;
   width: 200px;
   height: 250px;
-  margin: 20px 50px;
 }
 
 .Cards-image {

@@ -29,10 +29,12 @@ class Cards extends Component {
     return (
       <div className="Cards">
         <a href={this.state.url} target="blank">
-          <img className="Cards-image" src={this.state.image} alt="news" />
-          <p className="Cards-p">{this.state.author}</p>
-          <h4 className="Cards-h4">{this.state.title}</h4>
-          <p className="Cards-p">{this.state.content}</p>
+          <div className="Card">
+            <img className="Cards-image" src={this.state.image} alt="news" />
+            <p className="Cards-p">{this.state.author}</p>
+            <h4 className="Cards-h4">{this.state.title}</h4>
+            <p className="Cards-p">{this.state.content}</p>
+          </div>
         </a>
       </div>
     );
