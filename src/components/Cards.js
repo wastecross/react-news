@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import './Cards.css';
+import React, { Component } from "react";
+import "./Cards.css";
 
 class Cards extends Component {
   constructor(props) {
@@ -21,7 +21,7 @@ class Cards extends Component {
         this.state.content.substring(
           0,
           Math.min(this.state.content.length, 10)
-        ) + '...',
+        ) + "...",
     });
   }
 
@@ -30,10 +30,14 @@ class Cards extends Component {
       <div className="Cards">
         <a href={this.state.url} target="blank">
           <div className="Card">
-            <img className="Cards-image" src={this.state.image} alt="news" />
-            <p className="Cards-p">{this.state.author}</p>
-            <h4 className="Cards-h4">{this.state.title}</h4>
-            <p className="Cards-p">{this.state.content}</p>
+            <div className="Card-image">
+              <img src={this.state.image} alt="news" />
+            </div>
+            <div className="Card-content">
+              <h4 className="Card-h4">{this.state.title}</h4>
+              <p>{this.state.content}</p>
+              <p>Author: {this.state.author}</p>
+            </div>
           </div>
         </a>
       </div>
