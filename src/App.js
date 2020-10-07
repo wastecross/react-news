@@ -10,11 +10,16 @@ class App extends Component {
 
     //initialize button footer
     this.state = {
-      footer: (
-        <button className='App-button-enter' onClick={this.news}>
-          Enter
-        </button>
-      ),
+      footer:
+        this.props.history.location.pathname === '/news' ? (
+          <button className="App-button-back" onClick={this.home}>
+            Back
+          </button>
+        ) : (
+          <button className="App-button-enter" onClick={this.news}>
+            Enter
+          </button>
+        ),
     };
   }
 
@@ -22,7 +27,7 @@ class App extends Component {
     this.props.history.push('/');
     this.setState({
       footer: (
-        <button className='App-button-enter' onClick={this.news}>
+        <button className="App-button-enter" onClick={this.news}>
           Enter
         </button>
       ),
@@ -33,7 +38,7 @@ class App extends Component {
     this.props.history.push('/news');
     this.setState({
       footer: (
-        <button className='App-button-back' onClick={this.home}>
+        <button className="App-button-back" onClick={this.home}>
           Back
         </button>
       ),
