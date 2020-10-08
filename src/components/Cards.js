@@ -12,6 +12,7 @@ class Cards extends Component {
       image: props.image,
       author: props.author,
       url: props.url,
+      color: props.color,
     };
   }
 
@@ -33,7 +34,7 @@ class Cards extends Component {
             <div className="Card-image">
               <img src={this.state.image} alt="news" />
             </div>
-            <div className="Card-content">
+            <div className={`Card-content ${this.state.color}`}>
               <h4 className="Card-h4">{this.state.title}</h4>
               <p>{this.state.content}</p>
               <p>Author: {this.state.author}</p>

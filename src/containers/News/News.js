@@ -23,7 +23,7 @@ const News = () => {
     data.status === 200
       ? info.articles
           .slice(0, 11)
-          .map((news) => (
+          .map((news, index) => (
             <Cards
               title={news.title}
               image={news.urlToImage}
@@ -31,11 +31,12 @@ const News = () => {
               content={news.content}
               url={news.url}
               key={news.publishedAt}
+              color={(index+1) % 2 === 0 ? 'even' : 'odd'}
             />
           ))
       : newsArticles
           .slice(0, 11)
-          .map((news) => (
+          .map((news, index) => (
             <Cards
               title={news.title}
               image={news.urlToImage}
@@ -43,6 +44,7 @@ const News = () => {
               content={news.content}
               url={news.url}
               key={news.publishedAt}
+              color={(index+1) % 2 === 0 ? 'even' : 'odd'}
             />
           ));
 
