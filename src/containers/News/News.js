@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './News.css';
 import Cards from '../../components/Cards';
-import error from '../../assets/error.jpg';
+import { newsArticles } from '../../fixtures/news.fixture';
 
 const News = () => {
   const [data, setData] = useState({});
@@ -18,29 +18,33 @@ const News = () => {
   }, [setData]);
 
   const info = data.data;
-  console.log(data);
 
   const cards =
-    data.status === 200 ? (
-      info.articles
-        .slice(0, 11)
-        .map((news) => (
-          <Cards
-            title={news.title}
-            image={news.urlToImage}
-            author={news.author}
-            content={news.content}
-            url={news.url}
-            key={news.publishedAt}
-          />
-        ))
-    ) : (
-      <Cards
-        title='Error'
-        content='Cannot connect to the server'
-        image={error}
-      />
-    );
+    data.status === 200
+      ? info.articles
+          .slice(0, 11)
+          .map((news) => (
+            <Cards
+              title={news.title}
+              image={news.urlToImage}
+              author={news.author}
+              content={news.content}
+              url={news.url}
+              key={news.publishedAt}
+            />
+          ))
+      : newsArticles
+          .slice(0, 11)
+          .map((news) => (
+            <Cards
+              title={news.title}
+              image={news.urlToImage}
+              author={news.author}
+              content={news.content}
+              url={news.url}
+              key={news.publishedAt}
+            />
+          ));
 
   return (
     <div className="News">
