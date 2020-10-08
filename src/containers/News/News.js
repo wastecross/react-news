@@ -10,7 +10,7 @@ const News = () => {
   useEffect(() => {
     axios
       .get(
-        'http://newsapi.org/v2/everything?q=apple&from=2020-09-15&to=2020-10-15&sortBy=popularity&apiKey=d6736e08a3ac4859aeda69469b97d4cc'
+        'https://newsapi.org/v2/everything?q=apple&from=2020-09-15&to=2020-10-15&sortBy=popularity&apiKey=d6736e08a3ac4859aeda69469b97d4cc'
       )
       .then((response) => {
         setData(response);
