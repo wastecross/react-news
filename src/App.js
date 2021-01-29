@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import News from './containers/News/News';
 import Home from './containers/Home/Home';
+import Face from './containers/Face/Face';
 
 class App extends Component {
   constructor(props) {
@@ -16,9 +17,14 @@ class App extends Component {
             Back
           </button>
         ) : (
-          <button className="App-button-enter" onClick={this.news}>
-            Enter
-          </button>
+          <div className="App-buttons">
+            <button className="App-button-enter" onClick={this.news}>
+              News
+            </button>
+            <button className="App-button-face" onClick={this.face}>
+              Face
+            </button>
+          </div>
         ),
     };
   }
@@ -27,9 +33,14 @@ class App extends Component {
     this.props.history.push('/');
     this.setState({
       footer: (
-        <button className="App-button-enter" onClick={this.news}>
-          Enter
-        </button>
+        <div className="App-buttons">
+          <button className="App-button-enter" onClick={this.news}>
+            News
+          </button>
+          <button className="App-button-face" onClick={this.face}>
+            Face
+          </button>
+        </div>
       ),
     });
   };
@@ -45,12 +56,24 @@ class App extends Component {
     });
   };
 
+  face = () => {
+    this.props.history.push('/face');
+    this.setState({
+      footer: (
+        <button className="App-button-back" onClick={this.home}>
+          Back
+        </button>
+      ),
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <div className="App-container">
           <Route path="/" exact component={Home} />
           <Route path="/news" component={News} />
+          <Route path="/face" component={Face} />
         </div>
         <div className="App-footer">{this.state.footer}</div>
       </div>
