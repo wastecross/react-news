@@ -1,0 +1,19 @@
+.Face {
+  background-color: #282c34;
+  min-height: 100vh;
+}
+
+.Face-container {
+  background-color: #282c34;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  height: auto;
+}
+
+@media only screen and (max-width: 670px) {
+  .Face-container {
+    justify-content: center;
+  }
+}
