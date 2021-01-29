@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import './News.css';
-import Cards from '../../components/Cards';
+import Cards from '../../components/Cards/Cards';
 import { newsArticles } from '../../fixtures/news.fixture';
 
 const News = () => {
