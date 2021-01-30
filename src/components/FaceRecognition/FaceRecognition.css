@@ -1,0 +1,29 @@
+.FaceRecognition {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.FaceRecognition-images {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.FaceRecognition input {
+  color: white;
+}
+
+.FaceRecognition-first {
+  display: flex;
+  flex-direction: column;
+}
+
+.FaceRecognition-second {
+  display: flex;
+  flex-direction: column;
+}
+
+.FaceRecognition-button-upload {
+  background-color: #f89406;
+}

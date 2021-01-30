@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "./Face.css";
+import FaceRecognition from "../../components/FaceRecognition/FaceRecognition";
 
 const Face = () => {
   const [data, setData] = useState({});
@@ -17,7 +18,9 @@ const Face = () => {
 
   return (
     <div className="Face">
-      <div className="Face-container"></div>
+      <div className="Face-container">
+        <FaceRecognition />
+      </div>
     </div>
   );
 };
