@@ -10,8 +10,6 @@ const FaceRecognition = () => {
   const [imageFace, setImageFace] = useState(null);
   const [contentId, setContentId] = useState(<span />);
   const [contentFace, setContentFace] = useState(<span />);
-  const [isClickedId, setIsClickedId] = useState(false);
-  const [isClickedFace, setIsClickedFace] = useState(false);
   const [isSelectedId, setIsSelectedId] = useState(false);
   const [isSelectedFace, setIsSelectedFace] = useState(false);
   const [typeImage, setTypeImage] = useState(null);
@@ -22,11 +20,6 @@ const FaceRecognition = () => {
     const headers = {
       'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
       'Content-Type': 'application/octet-stream',
-    };
-
-    const headersVerify = {
-      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
-      'Content-Type': 'application/json',
     };
 
     switch (typeImage) {
@@ -49,6 +42,13 @@ const FaceRecognition = () => {
       default:
         break;
     }
+  }, [typeImage]);
+
+  useEffect(() => {
+    const headers = {
+      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
+      'Content-Type': 'application/json',
+    };
 
     if (isClickedVerify) {
       const req = JSON.stringify({
@@ -56,7 +56,7 @@ const FaceRecognition = () => {
         faceId2: dataFace?.data[0]?.faceId,
       });
 
-      axios.post(urlVerify, req, { headersVerify }).then(
+      axios.post(urlVerify, req, { headers }).then(
         (response) => {
           setResults(response);
         },
@@ -64,7 +64,7 @@ const FaceRecognition = () => {
       );
       setIsClickedVerify(false);
     }
-  }, [typeImage, isClickedVerify]);
+  }, [isClickedVerify]);
 
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -101,18 +101,14 @@ const FaceRecognition = () => {
   const fileUploadedHandler = async (type) => {
     if (type === 'id') {
       setTypeImage(type);
-      setIsClickedId(true);
     } else {
       setTypeImage(type);
-      setIsClickedFace(true);
     }
   };
 
   const onVerifyHandler = () => {
     setIsClickedVerify(true);
   };
-
-  console.log(results);
 
   return (
     <div className="FaceRecognition">
@@ -150,7 +146,7 @@ const FaceRecognition = () => {
         <button
           className="FaceRecognition-button-verify"
           onClick={onVerifyHandler}
-          disabled={!isClickedFace || !isClickedId}
+          disabled={!dataId || !dataFace}
         >
           Verify
         </button>
