@@ -10,6 +10,8 @@ const FaceRecognition = () => {
   const [dataFace, setDataFace] = useState(null);
   const [imageId, setImageId] = useState(null);
   const [imageFace, setImageFace] = useState(null);
+  const [contentId, setContentId] = useState(<span />);
+  const [contentFace, setContentFace] = useState(<span />);
   const [typeImage, setTypeImage] = useState(null);
 
   useEffect(() => {
@@ -47,30 +49,38 @@ const FaceRecognition = () => {
     });
   };
 
-  const fileSelectedHandler = (event, type) => {
+  const fileSelectedHandler = async (event, type) => {
+    const img = event?.target?.files[0];
+    const img64 = await convertBase64(img);
+
     if (type === 'id') {
-      setSelectedFileId(event.target.files[0]);
-      setTypeImage(type);
+      setSelectedFileId(img);
+      setImageId(img64);
+      setContentId(
+        <img src={img64} alt='idImage' style={{ maxWidth: '25rem' }} />
+      );
     } else {
-      setSelectedFileFace(event.target.files[0]);
-      setTypeImage(type);
+      setSelectedFileFace(img);
+      setImageFace(img64);
+      setContentFace(
+        <img src={img64} alt='FaceImage' style={{ maxWidth: '25rem' }} />
+      );
     }
   };
 
   const fileUploadedHandler = async (type) => {
     if (type === 'id') {
-      setImageId(await convertBase64(selectedFileId));
+      setTypeImage(type);
     } else {
-      setImageFace(await convertBase64(selectedFileFace));
+      setTypeImage(type);
     }
   };
-
-  console.log(dataId);
 
   return (
     <div className="FaceRecognition">
       <div className="FaceRecognition-images">
         <div className="FaceRecognition-first">
+          {contentId}
           <input
             type="file"
             onChange={(event) => fileSelectedHandler(event, "id")}
@@ -83,6 +93,7 @@ const FaceRecognition = () => {
           </button>
         </div>
         <div className="FaceRecognition-second">
+          {contentFace}
           <input
             type="file"
             onChange={(event) => fileSelectedHandler(event, "face")}
