@@ -31,14 +31,20 @@ const FaceRecognition = () => {
 
     switch (typeImage) {
       case 'id':
-        axios.post(urlDetect, imageId, { headers }).then((response) => {
-          setDataId(response);
-        });
+        axios.post(urlDetect, imageId, { headers }).then(
+          (response) => {
+            setDataId(response);
+          },
+          (error) => alert(error)
+        );
         break;
       case 'face':
-        axios.post(urlDetect, imageFace, { headers }).then((response) => {
-          setDataFace(response);
-        });
+        axios.post(urlDetect, imageFace, { headers }).then(
+          (response) => {
+            setDataFace(response);
+          },
+          (error) => alert(error)
+        );
         break;
       default:
         break;
@@ -50,9 +56,12 @@ const FaceRecognition = () => {
         faceId2: dataFace?.data[0]?.faceId,
       });
 
-      axios.post(urlVerify, req, { headersVerify }).then((response) => {
-        setResults(response);
-      });
+      axios.post(urlVerify, req, { headersVerify }).then(
+        (response) => {
+          setResults(response);
+        },
+        (error) => alert(error)
+      );
       setIsClickedVerify(false);
     }
   }, [typeImage, isClickedVerify]);
