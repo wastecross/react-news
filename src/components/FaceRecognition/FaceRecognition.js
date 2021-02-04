@@ -4,8 +4,6 @@ import './FaceRecognition.css';
 import { url } from '../../fixtures/face.fixture';
 
 const FaceRecognition = () => {
-  const [selectedFileId, setSelectedFileId] = useState(null);
-  const [selectedFileFace, setSelectedFileFace] = useState(null);
   const [dataId, setDataId] = useState(null);
   const [dataFace, setDataFace] = useState(null);
   const [imageId, setImageId] = useState(null);
@@ -54,14 +52,12 @@ const FaceRecognition = () => {
     const img64 = await convertBase64(img);
 
     if (type === 'id') {
-      setSelectedFileId(img);
-      setImageId(img64);
+      setImageId(img);
       setContentId(
         <img src={img64} alt='idImage' style={{ maxWidth: '12rem' }} />
       );
     } else {
-      setSelectedFileFace(img);
-      setImageFace(img64);
+      setImageFace(img);
       setContentFace(
         <img src={img64} alt='FaceImage' style={{ maxWidth: '12rem' }} />
       );
