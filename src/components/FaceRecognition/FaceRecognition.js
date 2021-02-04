@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./FaceRecognition.css";
-import { url } from "../../fixtures/face.fixture";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './FaceRecognition.css';
+import { urlDetect, urlVerify } from '../../fixtures/face.fixture';
 
 const FaceRecognition = () => {
   const [dataId, setDataId] = useState(null);
@@ -15,28 +15,47 @@ const FaceRecognition = () => {
   const [isSelectedId, setIsSelectedId] = useState(false);
   const [isSelectedFace, setIsSelectedFace] = useState(false);
   const [typeImage, setTypeImage] = useState(null);
+  const [isClickedVerify, setIsClickedVerify] = useState(false);
+  const [results, setResults] = useState(null);
 
   useEffect(() => {
     const headers = {
-      "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
-      "Content-Type": "application/octet-stream",
+      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
+      'Content-Type': 'application/octet-stream',
+    };
+
+    const headersVerify = {
+      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
+      'Content-Type': 'application/json',
     };
 
     switch (typeImage) {
-      case "id":
-        axios.post(url, imageId, { headers }).then((response) => {
+      case 'id':
+        axios.post(urlDetect, imageId, { headers }).then((response) => {
           setDataId(response);
         });
         break;
-      case "type":
-        axios.post(url, imageFace, { headers }).then((response) => {
+      case 'face':
+        axios.post(urlDetect, imageFace, { headers }).then((response) => {
           setDataFace(response);
         });
         break;
       default:
         break;
     }
-  }, [typeImage, imageId, imageFace, setDataFace, setDataId]);
+
+    if (isClickedVerify) {
+      const req = JSON.stringify({
+        faceId1: dataId?.data[0]?.faceId,
+        faceId2: dataFace?.data[0]?.faceId,
+      });
+
+      axios.post(urlVerify, req, { headersVerify }).then((response) => {
+        setResults(response);
+      });
+      setIsClickedVerify(false);
+    }
+  }, [typeImage, isClickedVerify]);
 
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -55,23 +74,23 @@ const FaceRecognition = () => {
     const img = event?.target?.files[0];
     const img64 = await convertBase64(img);
 
-    if (type === "id") {
+    if (type === 'id') {
       setImageId(img);
       setContentId(
-        <img src={img64} alt="idImage" className="FaceRecognition-img" />
+        <img src={img64} alt='idImage' className='FaceRecognition-img' />
       );
       setIsSelectedId(true);
     } else {
       setImageFace(img);
       setContentFace(
-        <img src={img64} alt="FaceImage" className="FaceRecognition-img" />
+        <img src={img64} alt='FaceImage' className='FaceRecognition-img' />
       );
       setIsSelectedFace(true);
     }
   };
 
   const fileUploadedHandler = async (type) => {
-    if (type === "id") {
+    if (type === 'id') {
       setTypeImage(type);
       setIsClickedId(true);
     } else {
@@ -81,8 +100,10 @@ const FaceRecognition = () => {
   };
 
   const onVerifyHandler = () => {
-    console.log(dataId);
+    setIsClickedVerify(true);
   };
+
+  console.log(results);
 
   return (
     <div className="FaceRecognition">
