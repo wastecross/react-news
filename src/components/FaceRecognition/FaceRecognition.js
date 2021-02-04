@@ -6,8 +6,10 @@ import { url } from '../../fixtures/face.fixture';
 const FaceRecognition = () => {
   const [selectedFileId, setSelectedFileId] = useState(null);
   const [selectedFileFace, setSelectedFileFace] = useState(null);
-  const [data, setData] = useState(null);
+  const [dataId, setDataId] = useState(null);
+  const [dataFace, setDataFace] = useState(null);
   const [imageId, setImageId] = useState(null);
+  const [imageFace, setImageFace] = useState(null);
   const [typeImage, setTypeImage] = useState(null);
 
   useEffect(() => {
@@ -19,13 +21,18 @@ const FaceRecognition = () => {
     switch (typeImage) {
       case 'id':
         axios.post(url, imageId, { headers }).then((response) => {
-          setData({ id: response, face: '' });
+          setDataId(response);
+        });
+        break;
+      case 'type':
+        axios.post(url, imageFace, { headers }).then((response) => {
+          setDataFace(response);
         });
         break;
       default:
         break;
     }
-  }, [typeImage, imageId, setData]);
+  }, [typeImage, imageId, imageFace, setDataFace, setDataId]);
 
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
@@ -46,6 +53,7 @@ const FaceRecognition = () => {
       setTypeImage(type);
     } else {
       setSelectedFileFace(event.target.files[0]);
+      setTypeImage(type);
     }
   };
 
@@ -53,11 +61,11 @@ const FaceRecognition = () => {
     if (type === 'id') {
       setImageId(await convertBase64(selectedFileId));
     } else {
-      await convertBase64(selectedFileFace);
+      setImageFace(await convertBase64(selectedFileFace));
     }
   };
 
-  console.log(data);
+  console.log(dataId);
 
   return (
     <div className="FaceRecognition">
