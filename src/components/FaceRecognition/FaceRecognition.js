@@ -57,13 +57,13 @@ const FaceRecognition = () => {
       setSelectedFileId(img);
       setImageId(img64);
       setContentId(
-        <img src={img64} alt='idImage' style={{ maxWidth: '25rem' }} />
+        <img src={img64} alt='idImage' style={{ maxWidth: '12rem' }} />
       );
     } else {
       setSelectedFileFace(img);
       setImageFace(img64);
       setContentFace(
-        <img src={img64} alt='FaceImage' style={{ maxWidth: '25rem' }} />
+        <img src={img64} alt='FaceImage' style={{ maxWidth: '12rem' }} />
       );
     }
   };
