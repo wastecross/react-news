@@ -9,12 +9,13 @@ const FaceRecognition = () => {
   const [data, setData] = useState(null);
   const [imageId, setImageId] = useState(null);
   const [typeImage, setTypeImage] = useState(null);
-  const headers = {
-    'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
-    'Content-Type': 'application/octet-stream',
-  };
 
   useEffect(() => {
+    const headers = {
+      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
+      'Content-Type': 'application/octet-stream',
+    };
+
     switch (typeImage) {
       case 'id':
         axios.post(url, imageId, { headers }).then((response) => {
@@ -24,7 +25,7 @@ const FaceRecognition = () => {
       default:
         break;
     }
-  }, [typeImage, imageId, headers, setData]);
+  }, [typeImage, imageId, setData]);
 
   const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
