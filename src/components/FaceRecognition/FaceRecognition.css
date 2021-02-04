@@ -38,9 +38,19 @@
   background-color: #f89406;
 }
 
+.FaceRecognition-button-upload:disabled {
+  background-color: #f3d47a;
+  cursor: not-allowed;
+}
+
 .FaceRecognition-button-verify {
   width: 18%;
   background-color: #738d00;
+}
+
+.FaceRecognition-button-verify:disabled {
+  background-color: #94c493;
+  cursor: not-allowed;
 }
 
 .FaceRecognition-img {

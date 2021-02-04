@@ -10,6 +10,10 @@ const FaceRecognition = () => {
   const [imageFace, setImageFace] = useState(null);
   const [contentId, setContentId] = useState(<span />);
   const [contentFace, setContentFace] = useState(<span />);
+  const [isClickedId, setIsClickedId] = useState(false);
+  const [isClickedFace, setIsClickedFace] = useState(false);
+  const [isSelectedId, setIsSelectedId] = useState(false);
+  const [isSelectedFace, setIsSelectedFace] = useState(false);
   const [typeImage, setTypeImage] = useState(null);
 
   useEffect(() => {
@@ -56,19 +60,23 @@ const FaceRecognition = () => {
       setContentId(
         <img src={img64} alt="idImage" className="FaceRecognition-img" />
       );
+      setIsSelectedId(true);
     } else {
       setImageFace(img);
       setContentFace(
         <img src={img64} alt="FaceImage" className="FaceRecognition-img" />
       );
+      setIsSelectedFace(true);
     }
   };
 
   const fileUploadedHandler = async (type) => {
     if (type === "id") {
       setTypeImage(type);
+      setIsClickedId(true);
     } else {
       setTypeImage(type);
+      setIsClickedFace(true);
     }
   };
 
@@ -88,6 +96,7 @@ const FaceRecognition = () => {
           <button
             className="FaceRecognition-button-upload"
             onClick={() => fileUploadedHandler("id")}
+            disabled={!isSelectedId}
           >
             Upload
           </button>
@@ -101,6 +110,7 @@ const FaceRecognition = () => {
           <button
             className="FaceRecognition-button-upload"
             onClick={() => fileUploadedHandler("face")}
+            disabled={!isSelectedFace}
           >
             Upload
           </button>
@@ -110,6 +120,7 @@ const FaceRecognition = () => {
         <button
           className="FaceRecognition-button-verify"
           onClick={onVerifyHandler}
+          disabled={!isClickedFace || !isClickedId}
         >
           Verify
         </button>
