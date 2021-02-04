@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './FaceRecognition.css';
-import { url } from '../../fixtures/face.fixture';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./FaceRecognition.css";
+import { url } from "../../fixtures/face.fixture";
 
 const FaceRecognition = () => {
   const [dataId, setDataId] = useState(null);
@@ -14,17 +14,17 @@ const FaceRecognition = () => {
 
   useEffect(() => {
     const headers = {
-      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
-      'Content-Type': 'application/octet-stream',
+      "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
+      "Content-Type": "application/octet-stream",
     };
 
     switch (typeImage) {
-      case 'id':
+      case "id":
         axios.post(url, imageId, { headers }).then((response) => {
           setDataId(response);
         });
         break;
-      case 'type':
+      case "type":
         axios.post(url, imageFace, { headers }).then((response) => {
           setDataFace(response);
         });
@@ -51,25 +51,29 @@ const FaceRecognition = () => {
     const img = event?.target?.files[0];
     const img64 = await convertBase64(img);
 
-    if (type === 'id') {
+    if (type === "id") {
       setImageId(img);
       setContentId(
-        <img src={img64} alt='idImage' style={{ maxWidth: '12rem' }} />
+        <img src={img64} alt="idImage" className="FaceRecognition-img" />
       );
     } else {
       setImageFace(img);
       setContentFace(
-        <img src={img64} alt='FaceImage' style={{ maxWidth: '12rem' }} />
+        <img src={img64} alt="FaceImage" className="FaceRecognition-img" />
       );
     }
   };
 
   const fileUploadedHandler = async (type) => {
-    if (type === 'id') {
+    if (type === "id") {
       setTypeImage(type);
     } else {
       setTypeImage(type);
     }
+  };
+
+  const onVerifyHandler = () => {
+    console.log(dataId);
   };
 
   return (
@@ -101,6 +105,14 @@ const FaceRecognition = () => {
             Upload
           </button>
         </div>
+      </div>
+      <div className="FaceRecognition-verify">
+        <button
+          className="FaceRecognition-button-verify"
+          onClick={onVerifyHandler}
+        >
+          Verify
+        </button>
       </div>
     </div>
   );

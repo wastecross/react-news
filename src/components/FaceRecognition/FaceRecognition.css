@@ -1,6 +1,7 @@
 .FaceRecognition {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
 }
 
@@ -17,13 +18,53 @@
 .FaceRecognition-first {
   display: flex;
   flex-direction: column;
+  width: 35%;
 }
 
 .FaceRecognition-second {
   display: flex;
   flex-direction: column;
+  width: 35%;
+}
+
+.FaceRecognition-verify {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 1rem 0;
 }
 
 .FaceRecognition-button-upload {
   background-color: #f89406;
+}
+
+.FaceRecognition-button-verify {
+  width: 18%;
+  background-color: #738d00;
+}
+
+.FaceRecognition-img {
+  max-width: 20rem;
+  height: 13rem;
+  align-self: center;
+}
+
+@media only screen and (max-width: 760px) {
+  .FaceRecognition-images {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .FaceRecognition-first {
+    width: 100%;
+  }
+
+  .FaceRecognition-second {
+    width: 100%;
+  }
+
+  .FaceRecognition-button-verify {
+    width: 40%;
+    background-color: #738d00;
+  }
 }
