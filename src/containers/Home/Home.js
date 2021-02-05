@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Home.css';
 import logo from '../../assets/logo-news.png';
+import { labels } from '../../fixtures/home.fixture';
 
 class Home extends Component {
   render() {
@@ -8,7 +9,7 @@ class Home extends Component {
       <div className="Home">
         <header className="Home-header">
           <img src={logo} className="Home-logo" alt="logo" />
-          <p>Welcome to News!</p>
+          <p>{labels.welcomeNews}</p>
         </header>
       </div>
     );
