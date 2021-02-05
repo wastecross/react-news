@@ -4,6 +4,7 @@ import './App.css';
 import News from './containers/News/News';
 import Home from './containers/Home/Home';
 import Face from './containers/Face/Face';
+import { labels } from './fixtures/app.fixture';
 
 class App extends Component {
   constructor(props) {
@@ -15,30 +16,30 @@ class App extends Component {
         this.props.history.location.pathname === "/" ? (
           <div className="App-buttons">
             <button className="App-button-enter" onClick={this.news}>
-              News
+              {labels.news}
             </button>
             <button className="App-button-face" onClick={this.face}>
-              Face
+              {labels.face}
             </button>
           </div>
         ) : (
           <button className="App-button-back" onClick={this.home}>
-            Back
+            {labels.back}
           </button>
         ),
     };
   }
 
   home = () => {
-    this.props.history.push('/');
+    this.props.history.push("/");
     this.setState({
       footer: (
         <div className="App-buttons">
           <button className="App-button-enter" onClick={this.news}>
-            News
+            {labels.news}
           </button>
           <button className="App-button-face" onClick={this.face}>
-            Face
+            {labels.face}
           </button>
         </div>
       ),
@@ -46,22 +47,22 @@ class App extends Component {
   };
 
   news = () => {
-    this.props.history.push('/news');
+    this.props.history.push("/news");
     this.setState({
       footer: (
         <button className="App-button-back" onClick={this.home}>
-          Back
+          {labels.back}
         </button>
       ),
     });
   };
 
   face = () => {
-    this.props.history.push('/face');
+    this.props.history.push("/face");
     this.setState({
       footer: (
         <button className="App-button-back" onClick={this.home}>
-          Back
+          {labels.back}
         </button>
       ),
     });
