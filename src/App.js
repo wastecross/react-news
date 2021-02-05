@@ -12,11 +12,7 @@ class App extends Component {
     //initialize button footer
     this.state = {
       footer:
-        this.props.history.location.pathname === '/news' ? (
-          <button className="App-button-back" onClick={this.home}>
-            Back
-          </button>
-        ) : (
+        this.props.history.location.pathname === "/" ? (
           <div className="App-buttons">
             <button className="App-button-enter" onClick={this.news}>
               News
@@ -25,6 +21,10 @@ class App extends Component {
               Face
             </button>
           </div>
+        ) : (
+          <button className="App-button-back" onClick={this.home}>
+            Back
+          </button>
         ),
     };
   }
