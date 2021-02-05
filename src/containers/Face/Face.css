@@ -1,12 +1,12 @@
 .Face {
   display: flex;
   align-items: center;
-  background-color: #282c34;
+  background-color: #434a58;
   min-height: 100vh;
 }
 
 .Face-container {
-  background-color: #282c34;
+  background-color: #434a58;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
