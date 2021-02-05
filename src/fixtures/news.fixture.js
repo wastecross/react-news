@@ -1,15 +1,15 @@
-import ps5 from '../assets/ps5.webp';
-import nintendo from '../assets/nintendo.png';
-import xbox from '../assets/xbox.jpeg';
-import apple from '../assets/apple.jpg';
-import watch from '../assets/watch.jpg';
-import appleEvent from '../assets/appleEvent.webp';
-import covid from '../assets/covid.jpg';
-import chiefs from '../assets/chiefs.webp';
-import mexico from '../assets/mexico.webp';
-import mexicoCOVID from '../assets/mexicoCOVID.jpg';
-import nfl from '../assets/nfl.webp';
-import nottingham from '../assets/nottingham.jpg';
+import ps5 from '../assets/images/ps5.webp';
+import nintendo from '../assets/images/nintendo.png';
+import xbox from '../assets/images/xbox.jpeg';
+import apple from '../assets/images/apple.jpg';
+import watch from '../assets/images/watch.jpg';
+import appleEvent from '../assets/images/appleEvent.webp';
+import covid from '../assets/images/covid.jpg';
+import chiefs from '../assets/images/chiefs.webp';
+import mexico from '../assets/images/mexico.webp';
+import mexicoCOVID from '../assets/images/mexicoCOVID.jpg';
+import nfl from '../assets/images/nfl.webp';
+import nottingham from '../assets/images/nottingham.jpg';
 
 export const newsArticles = [
   {
