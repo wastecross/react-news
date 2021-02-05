@@ -4,6 +4,8 @@ import './FaceRecognition.css';
 import { urlDetect, urlVerify } from '../../fixtures/face.fixture';
 import Modal from '../UI/Modal';
 import warning from '../../assets/warning.svg';
+import check from '../../assets/awesome-check.svg';
+import fail from '../../assets/awesome-fail.svg';
 
 const FaceRecognition = () => {
   const [dataId, setDataId] = useState(null);
@@ -80,8 +82,26 @@ const FaceRecognition = () => {
       axios.post(urlVerify, req, { headers }).then(
         (response) => {
           setResults(response);
+          setShowModal(
+            <Modal
+              text={
+                response?.data?.isIdentical
+                  ? `The verification was good. ${response?.data?.confidence}.`
+                  : `The verification failed. ${response?.data?.confidence}.`
+              }
+              click={onCloseModalHandler}
+              icon={response?.data?.isIdentical ? check : fail}
+            />
+          );
         },
-        (error) => alert(error)
+        (error) =>
+          setShowModal(
+            <Modal
+              text='Oh no! Something went wrong.'
+              click={onCloseModalHandler}
+              icon={warning}
+            />
+          )
       );
       setIsClickedVerify(false);
     }

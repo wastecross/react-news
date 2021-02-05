@@ -11,7 +11,11 @@ const Modal = (props) => {
         </span>
         <div className="Modal-message">
           {props.icon ? (
-            <img src={props.icon} alt="Icon" style={{ margin: "0 0.7rem" }} />
+            <img
+              src={props.icon}
+              alt="Icon"
+              style={{ margin: "0 0.7rem", width: "2rem" }}
+            />
           ) : null}
           {props.text}
         </div>
