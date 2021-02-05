@@ -3,9 +3,9 @@ import axios from 'axios';
 import './FaceRecognition.css';
 import { urlDetect, urlVerify } from '../../fixtures/face.fixture';
 import Modal from '../UI/Modal';
-import warning from '../../assets/warning.svg';
-import check from '../../assets/awesome-check.svg';
-import fail from '../../assets/awesome-fail.svg';
+import warning from '../../assets/icons/warning.svg';
+import check from '../../assets/icons/awesome-check.svg';
+import fail from '../../assets/icons/awesome-fail.svg';
 
 const FaceRecognition = () => {
   const [dataId, setDataId] = useState(null);
