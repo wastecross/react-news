@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './FaceRecognition.css';
 import { urlDetect, urlVerify } from '../../fixtures/face.fixture';
+import Modal from '../UI/Modal';
+import warning from '../../assets/warning.svg';
 
 const FaceRecognition = () => {
   const [dataId, setDataId] = useState(null);
@@ -15,6 +17,11 @@ const FaceRecognition = () => {
   const [typeImage, setTypeImage] = useState(null);
   const [isClickedVerify, setIsClickedVerify] = useState(false);
   const [results, setResults] = useState(null);
+  const [showModal, setShowModal] = useState(<span />);
+
+  const onCloseModalHandler = () => {
+    setShowModal(<span />);
+  };
 
   useEffect(() => {
     const headers = {
@@ -28,7 +35,14 @@ const FaceRecognition = () => {
           (response) => {
             setDataId(response);
           },
-          (error) => alert(error)
+          (error) =>
+            setShowModal(
+              <Modal
+                text='Oh no! Something went wrong.'
+                click={onCloseModalHandler}
+                icon={warning}
+              />
+            )
         );
         break;
       case 'face':
@@ -36,7 +50,14 @@ const FaceRecognition = () => {
           (response) => {
             setDataFace(response);
           },
-          (error) => alert(error)
+          (error) =>
+            setShowModal(
+              <Modal
+                text='Oh no! Something went wrong.'
+                click={onCloseModalHandler}
+                icon={warning}
+              />
+            )
         );
         break;
       default:
@@ -151,6 +172,7 @@ const FaceRecognition = () => {
           Verify
         </button>
       </div>
+      {showModal}
     </div>
   );
 };
