@@ -15,10 +15,20 @@ class App extends Component {
       footer:
         this.props.history.location.pathname === "/" ? (
           <div className="App-buttons">
-            <button className="App-button-enter" onClick={this.news}>
+            <button
+              className="App-button-enter"
+              onClick={this.news}
+              onMouseEnter={() => this.onEnterHandler("news")}
+              onMouseLeave={this.onLeaveHandler}
+            >
               {labels.news}
             </button>
-            <button className="App-button-face" onClick={this.face}>
+            <button
+              className="App-button-face"
+              onClick={this.face}
+              onMouseEnter={() => this.onEnterHandler("face")}
+              onMouseLeave={this.onLeaveHandler}
+            >
               {labels.face}
             </button>
           </div>
@@ -27,6 +37,7 @@ class App extends Component {
             {labels.back}
           </button>
         ),
+      typeWelcome: "home",
     };
   }
 
@@ -35,10 +46,20 @@ class App extends Component {
     this.setState({
       footer: (
         <div className="App-buttons">
-          <button className="App-button-enter" onClick={this.news}>
+          <button
+            className="App-button-enter"
+            onClick={this.news}
+            onMouseEnter={() => this.onEnterHandler("news")}
+            onMouseLeave={this.onLeaveHandler}
+          >
             {labels.news}
           </button>
-          <button className="App-button-face" onClick={this.face}>
+          <button
+            className="App-button-face"
+            onClick={this.face}
+            onMouseEnter={() => this.onEnterHandler("face")}
+            onMouseLeave={this.onLeaveHandler}
+          >
             {labels.face}
           </button>
         </div>
@@ -68,11 +89,23 @@ class App extends Component {
     });
   };
 
+  onEnterHandler = (type) => {
+    this.setState({ typeWelcome: type });
+    console.log(type);
+  };
+
+  onLeaveHandler = () => {
+    this.setState({ typeWelcome: "home" });
+  };
+
   render() {
     return (
       <div className="App">
         <div className="App-container">
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact>
+            {" "}
+            <Home type={this.state.typeWelcome} />{" "}
+          </Route>
           <Route path="/news" component={News} />
           <Route path="/face" component={Face} />
         </div>
