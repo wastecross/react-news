@@ -34,12 +34,28 @@
   margin: 1rem 0;
 }
 
+.FaceRecognition-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 .FaceRecognition-button-upload {
+  width: 50%;
   background-color: #f89406;
 }
 
 .FaceRecognition-button-upload:disabled {
   background-color: #f3d47a;
+  cursor: not-allowed;
+}
+
+.FaceRecognition-button-convert {
+  width: 50%;
+  background-color: #842fbe;
+}
+
+.FaceRecognition-button-convert:disabled {
+  background-color: #BF80EB;
   cursor: not-allowed;
 }
 

@@ -6,6 +6,7 @@ import Modal from '../UI/Modal';
 import warning from '../../assets/icons/warning.svg';
 import check from '../../assets/icons/awesome-check.svg';
 import fail from '../../assets/icons/awesome-fail.svg';
+import { labels } from '../../fixtures/faceRecognition.fixture';
 
 const FaceRecognition = () => {
   const [dataId, setDataId] = useState(null);
@@ -147,6 +148,11 @@ const FaceRecognition = () => {
     }
   };
 
+  const fileConvertedHandler = async (image) => {
+    const img64 = await convertBase64(image);
+    setShowModal(<Modal text={img64} click={onCloseModalHandler} type='b64' />);
+  };
+
   const onVerifyHandler = () => {
     setIsClickedVerify(true);
   };
@@ -160,13 +166,22 @@ const FaceRecognition = () => {
             type="file"
             onChange={(event) => fileSelectedHandler(event, "id")}
           />
-          <button
-            className="FaceRecognition-button-upload"
-            onClick={() => fileUploadedHandler("id")}
-            disabled={!isSelectedId}
-          >
-            Upload
-          </button>
+          <div className="FaceRecognition-buttons">
+            <button
+              className="FaceRecognition-button-upload"
+              onClick={() => fileUploadedHandler("id")}
+              disabled={!isSelectedId}
+            >
+              {labels.upload}
+            </button>
+            <button
+              className="FaceRecognition-button-convert"
+              onClick={() => fileConvertedHandler(imageId)}
+              disabled={!isSelectedId}
+            >
+              {labels.convert}
+            </button>
+          </div>
         </div>
         <div className="FaceRecognition-second">
           {contentFace}
@@ -174,13 +189,22 @@ const FaceRecognition = () => {
             type="file"
             onChange={(event) => fileSelectedHandler(event, "face")}
           />
-          <button
-            className="FaceRecognition-button-upload"
-            onClick={() => fileUploadedHandler("face")}
-            disabled={!isSelectedFace}
-          >
-            Upload
-          </button>
+          <div className="FaceRecognition-buttons">
+            <button
+              className="FaceRecognition-button-upload"
+              onClick={() => fileUploadedHandler("face")}
+              disabled={!isSelectedFace}
+            >
+              {labels.upload}
+            </button>
+            <button
+              className="FaceRecognition-button-convert"
+              onClick={() => fileConvertedHandler(imageFace)}
+              disabled={!isSelectedFace}
+            >
+              {labels.convert}
+            </button>
+          </div>
         </div>
       </div>
       <div className="FaceRecognition-verify">
@@ -189,7 +213,7 @@ const FaceRecognition = () => {
           onClick={onVerifyHandler}
           disabled={!dataId || !dataFace}
         >
-          Verify
+          {labels.verify}
         </button>
       </div>
       {showModal}
