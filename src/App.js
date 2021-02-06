@@ -91,7 +91,6 @@ class App extends Component {
 
   onEnterHandler = (type) => {
     this.setState({ typeWelcome: type });
-    console.log(type);
   };
 
   onLeaveHandler = () => {
