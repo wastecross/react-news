@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from 'react';
 
-import "./Modal.css";
+import './Modal.css';
+import copy from '../../assets/icons/copy.svg';
 
 const Modal = (props) => {
+  const [text, setText] = useState(null);
+  const onCopyHanlder = () => {
+    text.select();
+    document.execCommand('copy');
+  };
+
   return (
     <div className="Modal">
       <div
@@ -13,9 +20,12 @@ const Modal = (props) => {
           &times;
         </span>
         {props.type === "b64" ? (
-          <textarea style={{ height: "100%", width: "80%" }}>
-            {props.text}
-          </textarea>
+          <textarea
+            style={{ height: "100%", width: "80%" }}
+            ref={(textarea) => setText(textarea)}
+            value={props.text}
+            readOnly
+          />
         ) : (
           <div className="Modal-message">
             {props.icon ? (
@@ -28,6 +38,11 @@ const Modal = (props) => {
             {props.text}
           </div>
         )}
+        {props.type === "b64" ? (
+          <span onClick={onCopyHanlder}>
+            <img className="Modal-copy" src={copy} alt={"copy"} />
+          </span>
+        ) : null}
       </div>
     </div>
   );

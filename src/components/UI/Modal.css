@@ -20,6 +20,17 @@
   width: 80%; /* Could be more or less, depending on screen size */
 }
 
+/* The Copy Button */
+.Modal-copy {
+  width: 1rem;
+  float: left;
+}
+
+.Modal-copy:hover,
+.Modal-copy:focus {
+  cursor: pointer;
+}
+
 /* The Close Button */
 .Modal-close {
   color: #aaa;
