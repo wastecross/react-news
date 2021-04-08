@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import './FaceRecognition.css';
-import { urlDetect, urlVerify } from '../../fixtures/face.fixture';
-import Modal from '../UI/Modal';
-import warning from '../../assets/icons/warning.svg';
-import check from '../../assets/icons/awesome-check.svg';
-import fail from '../../assets/icons/awesome-fail.svg';
-import { labels } from '../../fixtures/faceRecognition.fixture';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import "./FaceRecognition.css";
+import { urlDetect, urlVerify } from "../../fixtures/face.fixture";
+import Modal from "../UI/Modal";
+import warning from "../../assets/icons/warning.svg";
+import check from "../../assets/icons/awesome-check.svg";
+import fail from "../../assets/icons/awesome-fail.svg";
+import { labels } from "../../fixtures/faceRecognition.fixture";
 
 const FaceRecognition = () => {
   const [dataId, setDataId] = useState(null);
@@ -19,7 +19,6 @@ const FaceRecognition = () => {
   const [isSelectedFace, setIsSelectedFace] = useState(false);
   const [typeImage, setTypeImage] = useState(null);
   const [isClickedVerify, setIsClickedVerify] = useState(false);
-  const [results, setResults] = useState(null);
   const [showModal, setShowModal] = useState(<span />);
 
   const onCloseModalHandler = () => {
@@ -28,12 +27,12 @@ const FaceRecognition = () => {
 
   useEffect(() => {
     const headers = {
-      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
-      'Content-Type': 'application/octet-stream',
+      "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
+      "Content-Type": "application/octet-stream",
     };
 
     switch (typeImage) {
-      case 'id':
+      case "id":
         axios.post(urlDetect, imageId, { headers }).then(
           (response) => {
             setDataId(response);
@@ -41,14 +40,14 @@ const FaceRecognition = () => {
           (error) =>
             setShowModal(
               <Modal
-                text='Oh no! Something went wrong.'
+                text="Oh no! Something went wrong."
                 click={onCloseModalHandler}
                 icon={warning}
               />
             )
         );
         break;
-      case 'face':
+      case "face":
         axios.post(urlDetect, imageFace, { headers }).then(
           (response) => {
             setDataFace(response);
@@ -56,7 +55,7 @@ const FaceRecognition = () => {
           (error) =>
             setShowModal(
               <Modal
-                text='Oh no! Something went wrong.'
+                text="Oh no! Something went wrong."
                 click={onCloseModalHandler}
                 icon={warning}
               />
@@ -66,12 +65,13 @@ const FaceRecognition = () => {
       default:
         break;
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeImage]);
 
   useEffect(() => {
     const headers = {
-      'Ocp-Apim-Subscription-Key': '8e4b044422be460797579e2b59efc675',
-      'Content-Type': 'application/json',
+      "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
+      "Content-Type": "application/json",
     };
 
     if (isClickedVerify) {
@@ -82,7 +82,6 @@ const FaceRecognition = () => {
 
       axios.post(urlVerify, req, { headers }).then(
         (response) => {
-          setResults(response);
           setShowModal(
             <Modal
               text={
@@ -98,7 +97,7 @@ const FaceRecognition = () => {
         (error) =>
           setShowModal(
             <Modal
-              text='Oh no! Something went wrong.'
+              text="Oh no! Something went wrong."
               click={onCloseModalHandler}
               icon={warning}
             />
@@ -106,42 +105,46 @@ const FaceRecognition = () => {
       );
       setIsClickedVerify(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClickedVerify]);
 
   const convertBase64 = (file) => {
-    return new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsDataURL(file);
-      fileReader.onload = () => {
-        resolve(fileReader.result);
-      };
-      fileReader.onerror = (error) => {
-        reject(error);
-      };
-    });
+    if (file) {
+      return new Promise((resolve, reject) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file);
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
+        fileReader.onerror = (error) => {
+          reject(error);
+        };
+      });
+    }
+    return;
   };
 
   const fileSelectedHandler = async (event, type) => {
     const img = event?.target?.files[0];
     const img64 = await convertBase64(img);
 
-    if (type === 'id') {
+    if (type === "id") {
       setImageId(img);
       setContentId(
-        <img src={img64} alt='idImage' className='FaceRecognition-img' />
+        <img src={img64} alt="idImage" className="FaceRecognition-img" />
       );
       setIsSelectedId(true);
     } else {
       setImageFace(img);
       setContentFace(
-        <img src={img64} alt='FaceImage' className='FaceRecognition-img' />
+        <img src={img64} alt="FaceImage" className="FaceRecognition-img" />
       );
       setIsSelectedFace(true);
     }
   };
 
   const fileUploadedHandler = async (type) => {
-    if (type === 'id') {
+    if (type === "id") {
       setTypeImage(type);
     } else {
       setTypeImage(type);
@@ -150,7 +153,12 @@ const FaceRecognition = () => {
 
   const fileConvertedHandler = async (image) => {
     const img64 = await convertBase64(image);
-    setShowModal(<Modal text={img64} click={onCloseModalHandler} type='b64' />);
+    const img64Fixed = img64?.includes("data:image/png;base64,")
+      ? img64?.replace("data:image/png;base64,", "")
+      : img64?.replace("data:image/jpeg;base64,", "");
+    setShowModal(
+      <Modal text={img64Fixed} click={onCloseModalHandler} type="b64" />
+    );
   };
 
   const onVerifyHandler = () => {
