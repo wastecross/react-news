@@ -1,9 +1,10 @@
-import React from 'react';
-import './Home.css';
-import logoNews from '../../assets/logo-news.png';
-import logoFace from '../../assets/logo-face.png';
-import logo from '../../assets/logo-welcome.png';
-import { labels } from '../../fixtures/home.fixture';
+import React from "react";
+import "./Home.css";
+import logoNews from "../../assets/logo-news.png";
+import logoFace from "../../assets/logo-face.png";
+import logoConvert from "../../assets/logo-convert.png";
+import logo from "../../assets/logo-welcome.png";
+import { labels } from "../../fixtures/home.fixture";
 
 const Home = (props) => {
   return (
@@ -15,6 +16,8 @@ const Home = (props) => {
               ? logoNews
               : props.type === "face"
               ? logoFace
+              : props.type === "convert"
+              ? logoConvert
               : logo
           }
           className="Home-logo"
@@ -25,6 +28,8 @@ const Home = (props) => {
             ? labels.welcomeNews
             : props.type === "face"
             ? labels.welcomeFace
+            : props.type === "convert"
+            ? labels.welcomeConvert
             : labels.welcome}
         </p>
       </header>
