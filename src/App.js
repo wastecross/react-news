@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import './App.css';
-import News from './containers/News/News';
-import Home from './containers/Home/Home';
-import Face from './containers/Face/Face';
-import { labels } from './fixtures/app.fixture';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "./App.css";
+import News from "./containers/News/News";
+import Home from "./containers/Home/Home";
+import Face from "./containers/Face/Face";
+import Convert from "./containers/Convert/Convert";
+import { labels } from "./fixtures/app.fixture";
 
 class App extends Component {
   constructor(props) {
@@ -22,6 +23,14 @@ class App extends Component {
               onMouseLeave={this.onLeaveHandler}
             >
               {labels.news}
+            </button>
+            <button
+              className="App-button-convert"
+              onClick={this.convert}
+              onMouseEnter={() => this.onEnterHandler("convert")}
+              onMouseLeave={this.onLeaveHandler}
+            >
+              {labels.convert}
             </button>
             <button
               className="App-button-face"
@@ -53,6 +62,14 @@ class App extends Component {
             onMouseLeave={this.onLeaveHandler}
           >
             {labels.news}
+          </button>
+          <button
+            className="App-button-convert"
+            onClick={this.convert}
+            onMouseEnter={() => this.onEnterHandler("convert")}
+            onMouseLeave={this.onLeaveHandler}
+          >
+            {labels.convert}
           </button>
           <button
             className="App-button-face"
@@ -89,6 +106,17 @@ class App extends Component {
     });
   };
 
+  convert = () => {
+    this.props.history.push("/convert");
+    this.setState({
+      footer: (
+        <button className="App-button-back" onClick={this.home}>
+          {labels.back}
+        </button>
+      ),
+    });
+  };
+
   onEnterHandler = (type) => {
     this.setState({ typeWelcome: type });
   };
@@ -107,6 +135,7 @@ class App extends Component {
           </Route>
           <Route path="/news" component={News} />
           <Route path="/face" component={Face} />
+          <Route path="/convert" component={Convert} />
         </div>
         <div className="App-footer">{this.state.footer}</div>
       </div>
