@@ -1,0 +1,42 @@
+.Convert {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #434a58;
+    min-height: 100vh;
+  }
+  
+  .Convert-header {
+    background-color: #434a58;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    margin-bottom: 10%;
+  }
+  
+  .Convert-container {
+    background-color: #434a58;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+  }
+  
+  .Convert-button {
+    background-color: green;
+    width: 35%;
+  }
+  
+  .Convert-button:disabled {
+    background-color: #f3d47a;
+    cursor: not-allowed;
+  }
+  
+  @media only screen and (max-width: 670px) {
+    .Convert-container {
+      justify-content: center;
+    }
+  }
+  
