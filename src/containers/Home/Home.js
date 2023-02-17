@@ -3,6 +3,7 @@ import "./Home.css";
 import logoNews from "../../assets/logo-news.png";
 import logoFace from "../../assets/logo-face.png";
 import logoConvert from "../../assets/logo-convert.png";
+import logoSdk from "../../assets/logo-sdk.png";
 import logo from "../../assets/logo-welcome.png";
 import { labels } from "../../fixtures/home.fixture";
 
@@ -18,6 +19,8 @@ const Home = (props) => {
               ? logoFace
               : props.type === "convert"
               ? logoConvert
+              : props.type === "sdk"
+              ? logoSdk
               : logo
           }
           className="Home-logo"
