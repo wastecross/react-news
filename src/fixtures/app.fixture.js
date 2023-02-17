@@ -6,4 +6,5 @@ export const labels = {
   face: "Face",
   back: "Back",
   convert: "Convert",
+  sdk: "SDK",
 };
