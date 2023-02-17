@@ -40,9 +40,13 @@ button {
 }
 
 .App-button-face {
-  background-color: #297fb9;
+  background-color: #f44336;
 }
 
 .App-button-convert {
   background-color: #800080;
+}
+
+.App-button-sdk {
+  background-color: #297fb9;
 }

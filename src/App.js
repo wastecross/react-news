@@ -5,6 +5,7 @@ import News from "./containers/News/News";
 import Home from "./containers/Home/Home";
 import Face from "./containers/Face/Face";
 import Convert from "./containers/Convert/Convert";
+import Sdk from "./containers/Sdk/Sdk";
 import { labels } from "./fixtures/app.fixture";
 
 class App extends Component {
@@ -39,6 +40,14 @@ class App extends Component {
               onMouseLeave={this.onLeaveHandler}
             >
               {labels.face}
+            </button>
+            <button
+              className="App-button-sdk"
+              onClick={this.sdk}
+              onMouseEnter={() => this.onEnterHandler("sdk")}
+              onMouseLeave={this.onLeaveHandler}
+            >
+              {labels.sdk}
             </button>
           </div>
         ) : (
@@ -79,6 +88,14 @@ class App extends Component {
           >
             {labels.face}
           </button>
+          <button
+              className="App-button-sdk"
+              onClick={this.sdk}
+              onMouseEnter={() => this.onEnterHandler("sdk")}
+              onMouseLeave={this.onLeaveHandler}
+            >
+              {labels.sdk}
+            </button>
         </div>
       ),
     });
@@ -117,6 +134,17 @@ class App extends Component {
     });
   };
 
+  sdk = () => {
+    this.props.history.push("/sdk");
+    this.setState({
+      footer: (
+        <button className="App-button-back" onClick={this.home}>
+          {labels.back}
+        </button>
+      ),
+    });
+  };
+
   onEnterHandler = (type) => {
     this.setState({ typeWelcome: type });
   };
@@ -136,6 +164,7 @@ class App extends Component {
           <Route path="/news" component={News} />
           <Route path="/face" component={Face} />
           <Route path="/convert" component={Convert} />
+          <Route path="/sdk" component={Sdk} />
         </div>
         <div className="App-footer">{this.state.footer}</div>
       </div>
