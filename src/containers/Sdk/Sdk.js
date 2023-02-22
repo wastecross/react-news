@@ -21,6 +21,7 @@ const Sdk = () => {
       const publicApiKey = "";
       const vdid = new WebVerification(publicApiKey);
       const url = vdid.getUrlToOnlyCaptureImages();
+
       setContainer(
         <iframe src={url} title="Sdk VDID" allow="camera; microphone"></iframe>
       );
