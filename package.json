@@ -13,7 +13,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^5.0.1",
-    "vdid-sdk-web": "^1.1.5",
+    "vdid-sdk-web": "^1.1.6",
     "xlsx": "^0.18.5"
   },
   "scripts": {
