@@ -9,10 +9,9 @@ const Sdk = () => {
   useEffect(() => {
     window.addEventListener("message", (ev) => {
       if (typeof ev.data !== "object") return;
-      if (!ev.data.type) return;
-      if (ev.data.type !== "button-click") return;
-      if (!ev.data.message) return;
-      setImages(ev.data.message);
+      if (!ev.data.images) return;
+
+      setImages(ev.data.images);
     });
   }, []);
 
@@ -20,16 +19,23 @@ const Sdk = () => {
     try {
       const publicApiKey = "";
       const vdid = new WebVerification(publicApiKey);
-      const url = vdid.getUrlToOnlyCaptureImages();
+      const url = vdid.getUrlToOnlyCaptureImages("id");
 
       setContainer(
-        <iframe src={url} title="Sdk VDID" allow="camera; microphone"></iframe>
+        <iframe
+          src={url}
+          title="Sdk VDID"
+          allow="camera; microphone"
+          width="400"
+          height="600"
+        ></iframe>
       );
     } catch (error) {
-      console.log(error);
       setContainer(<p style={{ color: "red" }}>ERROR</p>);
     }
   };
+
+  console.log(images);
 
   return (
     <div className="Sdk">
@@ -39,7 +45,6 @@ const Sdk = () => {
         </button>
       </div>
       <div className="Sdk-container">{container}</div>
-      <div>{images}</div>
     </div>
   );
 };
