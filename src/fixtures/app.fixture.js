@@ -7,4 +7,5 @@ export const labels = {
   back: "Back",
   convert: "Convert",
   sdk: "SDK",
+  upscaler: "Upscaler",
 };
