@@ -4,6 +4,7 @@ import logoNews from "../../assets/logo-news.png";
 import logoFace from "../../assets/logo-face.png";
 import logoConvert from "../../assets/logo-convert.png";
 import logoSdk from "../../assets/logo-sdk.png";
+import logoUpscaler from "../../assets/logo-upscaler.png";
 import logo from "../../assets/logo-welcome.png";
 import { labels } from "../../fixtures/home.fixture";
 
@@ -21,6 +22,8 @@ const Home = (props) => {
               ? logoConvert
               : props.type === "sdk"
               ? logoSdk
+              : props.type === "upscaler"
+              ? logoUpscaler
               : logo
           }
           className="Home-logo"
@@ -33,6 +36,10 @@ const Home = (props) => {
             ? labels.welcomeFace
             : props.type === "convert"
             ? labels.welcomeConvert
+            : props.type === "sdk"
+            ? labels.welcomeSdk
+            : props.type === "upscaler"
+            ? labels.welcomeUpscaler
             : labels.welcome}
         </p>
       </header>
