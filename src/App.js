@@ -6,6 +6,7 @@ import Home from "./containers/Home/Home";
 import Face from "./containers/Face/Face";
 import Convert from "./containers/Convert/Convert";
 import Sdk from "./containers/Sdk/Sdk";
+import UpscalerCmpnt from "./containers/Upscaler/Upscaler";
 import { labels } from "./fixtures/app.fixture";
 
 class App extends Component {
@@ -49,6 +50,14 @@ class App extends Component {
             >
               {labels.sdk}
             </button>
+            <button
+              className="App-button-upscaler"
+              onClick={this.upscaler}
+              onMouseEnter={() => this.onEnterHandler("upscaler")}
+              onMouseLeave={this.onLeaveHandler}
+            >
+              {labels.upscaler}
+            </button>
           </div>
         ) : (
           <button className="App-button-back" onClick={this.home}>
@@ -89,13 +98,21 @@ class App extends Component {
             {labels.face}
           </button>
           <button
-              className="App-button-sdk"
-              onClick={this.sdk}
-              onMouseEnter={() => this.onEnterHandler("sdk")}
-              onMouseLeave={this.onLeaveHandler}
-            >
-              {labels.sdk}
-            </button>
+            className="App-button-sdk"
+            onClick={this.sdk}
+            onMouseEnter={() => this.onEnterHandler("sdk")}
+            onMouseLeave={this.onLeaveHandler}
+          >
+            {labels.sdk}
+          </button>
+          <button
+            className="App-button-upscaler"
+            onClick={this.upscaler}
+            onMouseEnter={() => this.onEnterHandler("upscaler")}
+            onMouseLeave={this.onLeaveHandler}
+          >
+            {labels.upscaler}
+          </button>
         </div>
       ),
     });
@@ -145,6 +162,17 @@ class App extends Component {
     });
   };
 
+  upscaler = () => {
+    this.props.history.push("/upscaler");
+    this.setState({
+      footer: (
+        <button className="App-button-back" onClick={this.home}>
+          {labels.back}
+        </button>
+      ),
+    });
+  };
+
   onEnterHandler = (type) => {
     this.setState({ typeWelcome: type });
   };
@@ -165,6 +193,7 @@ class App extends Component {
           <Route path="/face" component={Face} />
           <Route path="/convert" component={Convert} />
           <Route path="/sdk" component={Sdk} />
+          <Route path="/upscaler" component={UpscalerCmpnt} />
         </div>
         <div className="App-footer">{this.state.footer}</div>
       </div>
