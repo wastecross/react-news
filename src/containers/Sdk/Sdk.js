@@ -17,9 +17,11 @@ const Sdk = () => {
 
   const onClickHandler = async () => {
     try {
-      const publicApiKey = "";
+      const publicApiKey =
+        "pk_test_ElTXm0vy1O1D44zIemBiniFqQzYPnMiURuo2tFkRHyY=";
       const vdid = new WebVerification(publicApiKey);
-      const url = vdid.getUrlToOnlyCaptureImages("id");
+      const url = vdid.getUrl({ uuid: "" });
+      console.log(url);
 
       setContainer(
         <iframe
@@ -28,7 +30,7 @@ const Sdk = () => {
           allow="camera; microphone"
           width="400"
           height="600"
-        ></iframe>
+        />
       );
     } catch (error) {
       setContainer(<p style={{ color: "red" }}>ERROR</p>);
