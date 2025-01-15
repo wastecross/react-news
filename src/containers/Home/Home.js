@@ -16,7 +16,7 @@ const Home = (props) => {
     convert: logoConvert,
     sdk: logoSdk,
     upscaler: logoUpscaler,
-    key: logoKey,
+    keys: logoKey,
     home: logo,
   };
 
