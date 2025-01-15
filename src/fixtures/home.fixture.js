@@ -8,5 +8,5 @@ export const labels = {
   convert: "Welcome to Convert!",
   sdk: "Welcome to Sdk!",
   upscaler: "Welcome to Upscaler!",
-  keys: "Welcome to Keys!"
+  keys: "Welcome to Token!"
 };

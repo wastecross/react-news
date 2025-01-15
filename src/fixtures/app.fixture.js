@@ -8,4 +8,5 @@ export const labels = {
   convert: "Convert",
   sdk: "SDK",
   upscaler: "Upscaler",
+  keys: "Token"
 };
