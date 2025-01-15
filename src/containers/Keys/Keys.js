@@ -21,14 +21,13 @@ const Keys = () => {
   const onClickHandler = async () => {
     const response = await fetch(urlToken, {
       method: "POST",
-      headers: { "Content-type": "application/json" },
       body: JSON.stringify({ client_id, client_secret, audience, grant_type }),
     });
     const result = await response.json();
 
     setShowModal(
       <Modal
-        text={JSON.stringify(result.scope)}
+        text={JSON.stringify(response.ok ? result.scope : result)}
         click={onCloseModalHandler}
         icon={response.ok ? check : failed}
       />
