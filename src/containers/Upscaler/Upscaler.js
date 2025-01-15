@@ -1,14 +1,14 @@
 import React from "react";
-import Upscaler from "upscaler";
+// import Upscaler from "upscaler";
 import image from "../../assets/templates/CaseErrorFront_01.jpg";
 import "./Upscaler.css";
 
 const UpscalerCmpnt = () => {
   const onClickHandler = () => {
-    const upscaler = new Upscaler();
-    upscaler.upscale(image).then((upscaledImage) => {
-      console.log(upscaledImage); // base64 representation of image src
-    });
+    // const upscaler = new Upscaler();
+    // upscaler.upscale(image).then((upscaledImage) => {
+    //   console.log(upscaledImage); // base64 representation of image src
+    // });
   };
 
   return (
