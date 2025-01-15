@@ -7,6 +7,7 @@ import Face from "./containers/Face/Face";
 import Convert from "./containers/Convert/Convert";
 import Sdk from "./containers/Sdk/Sdk";
 import UpscalerCmpnt from "./containers/Upscaler/Upscaler";
+import Keys from "./containers/Keys/Keys";
 import { labels } from "./fixtures/app.fixture";
 
 class App extends Component {
@@ -57,6 +58,14 @@ class App extends Component {
               onMouseLeave={this.onLeaveHandler}
             >
               {labels.upscaler}
+            </button>
+            <button
+              className="App-button-keys"
+              onClick={this.keys}
+              onMouseEnter={() => this.onEnterHandler("keys")}
+              onMouseLeave={this.onLeaveHandler}
+            >
+              {labels.keys}
             </button>
           </div>
         ) : (
@@ -112,6 +121,14 @@ class App extends Component {
             onMouseLeave={this.onLeaveHandler}
           >
             {labels.upscaler}
+          </button>
+          <button
+            className="App-button-keys"
+            onClick={this.keys}
+            onMouseEnter={() => this.onEnterHandler("keys")}
+            onMouseLeave={this.onLeaveHandler}
+          >
+            {labels.keys}
           </button>
         </div>
       ),
@@ -173,6 +190,17 @@ class App extends Component {
     });
   };
 
+  keys = () => {
+    this.props.history.push("/token");
+    this.setState({
+      footer: (
+        <button className="App-button-back" onClick={this.home}>
+          {labels.back}
+        </button>
+      ),
+    });
+  };
+
   onEnterHandler = (type) => {
     this.setState({ typeWelcome: type });
   };
@@ -194,6 +222,7 @@ class App extends Component {
           <Route path="/convert" component={Convert} />
           <Route path="/sdk" component={Sdk} />
           <Route path="/upscaler" component={UpscalerCmpnt} />
+          <Route path="/token" component={Keys} />
         </div>
         <div className="App-footer">{this.state.footer}</div>
       </div>
