@@ -3,6 +3,13 @@ import "./Keys.css";
 import Modal from "../../components/UI/Modal";
 import check from "../../assets/icons/awesome-check.svg";
 import failed from "../../assets/icons/awesome-fail.svg";
+import {
+  audience,
+  client_id,
+  client_secret,
+  grant_type,
+  urlToken,
+} from "../../fixtures/token.fixture";
 
 const Keys = () => {
   const [showModal, setShowModal] = useState(<span />);
@@ -11,12 +18,19 @@ const Keys = () => {
     setShowModal(<span />);
   };
 
-  const onClickHandler = () => {
+  const onClickHandler = async () => {
+    const response = await fetch(urlToken, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify({ client_id, client_secret, audience, grant_type }),
+    });
+    const result = await response.json();
+
     setShowModal(
       <Modal
-        text="Failed to generate token"
+        text={JSON.stringify(result.scope)}
         click={onCloseModalHandler}
-        icon={failed}
+        icon={response.ok ? check : failed}
       />
     );
   };
