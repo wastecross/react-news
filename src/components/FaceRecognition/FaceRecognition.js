@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./FaceRecognition.css";
 import { urlDetect, urlVerify } from "../../fixtures/face.fixture";
 import Modal from "../UI/Modal";
@@ -26,85 +25,82 @@ const FaceRecognition = () => {
   };
 
   useEffect(() => {
-    const headers = {
-      "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
-      "Content-Type": "application/octet-stream",
+    const handleTypeImage = async () => {
+      const headers = {
+        "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
+        "Content-Type": "application/octet-stream",
+      };
+
+      const response = await fetch(urlDetect, {
+        method: "POST",
+        headers,
+        body: typeImage === "id" ? imageId : imageFace,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+
+        if (typeImage === "id") setDataId(result);
+        if (typeImage === "face") setDataFace(result);
+      } else {
+        setShowModal(
+          <Modal
+            text="Oh no! Something went wrong."
+            click={onCloseModalHandler}
+            icon={warning}
+          />
+        );
+      }
     };
 
-    switch (typeImage) {
-      case "id":
-        axios.post(urlDetect, imageId, { headers }).then(
-          (response) => {
-            setDataId(response);
-          },
-          (error) =>
-            setShowModal(
-              <Modal
-                text="Oh no! Something went wrong."
-                click={onCloseModalHandler}
-                icon={warning}
-              />
-            )
-        );
-        break;
-      case "face":
-        axios.post(urlDetect, imageFace, { headers }).then(
-          (response) => {
-            setDataFace(response);
-          },
-          (error) =>
-            setShowModal(
-              <Modal
-                text="Oh no! Something went wrong."
-                click={onCloseModalHandler}
-                icon={warning}
-              />
-            )
-        );
-        break;
-      default:
-        break;
-    }
+    handleTypeImage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeImage]);
 
   useEffect(() => {
-    const headers = {
-      "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
-      "Content-Type": "application/json",
-    };
+    const handleVerifyImage = async () => {
+      if (isClickedVerify) {
+        const headers = {
+          "Ocp-Apim-Subscription-Key": "8e4b044422be460797579e2b59efc675",
+          "Content-Type": "application/json",
+        };
+        const response = await fetch(urlVerify, {
+          method: "POST",
+          headers,
+          body: JSON.stringify({
+            faceId1: dataId?.data[0]?.faceId,
+            faceId2: dataFace?.data[0]?.faceId,
+          }),
+        });
 
-    if (isClickedVerify) {
-      const req = JSON.stringify({
-        faceId1: dataId?.data[0]?.faceId,
-        faceId2: dataFace?.data[0]?.faceId,
-      });
-
-      axios.post(urlVerify, req, { headers }).then(
-        (response) => {
+        if (response.ok) {
+          const result = await response.json();
           setShowModal(
             <Modal
               text={
-                response?.data?.isIdentical
-                  ? `The verification was good. ${response?.data?.confidence}.`
-                  : `The verification failed. ${response?.data?.confidence}.`
+                result?.data?.isIdentical
+                  ? `The verification was good. ${result?.data?.confidence}.`
+                  : `The verification failed. ${result?.data?.confidence}.`
               }
               click={onCloseModalHandler}
-              icon={response?.data?.isIdentical ? check : fail}
+              icon={result?.data?.isIdentical ? check : fail}
             />
           );
-        },
-        (error) =>
+        } else {
           setShowModal(
             <Modal
               text="Oh no! Something went wrong."
               click={onCloseModalHandler}
               icon={warning}
             />
-          )
-      );
-      setIsClickedVerify(false);
-    }
+          );
+        }
+
+        setIsClickedVerify(false);
+      }
+    };
+
+    handleVerifyImage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isClickedVerify]);
 
@@ -121,7 +117,6 @@ const FaceRecognition = () => {
         };
       });
     }
-    return;
   };
 
   const fileSelectedHandler = async (event, type) => {
@@ -144,11 +139,7 @@ const FaceRecognition = () => {
   };
 
   const fileUploadedHandler = async (type) => {
-    if (type === "id") {
-      setTypeImage(type);
-    } else {
-      setTypeImage(type);
-    }
+    setTypeImage(type);
   };
 
   const fileConvertedHandler = async (image) => {
